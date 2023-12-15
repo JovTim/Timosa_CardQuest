@@ -13,4 +13,6 @@ class PokemonAdmin(admin.ModelAdmin):
     list_display = ("name", "rarity", "hp", "card_type", "attack", "description", "weakness", "card_number", "release_date", "evolution_stage", 'abilities')
     search_fields = ("name",)
 
-admin.site.register(Collection)
+@admin.register(Collection)
+class CollectionAdmin(admin.ModelAdmin):
+    list_display = ("trainer", "card", "collection_date")
