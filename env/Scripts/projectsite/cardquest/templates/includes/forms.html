@@ -1,0 +1,46 @@
+{% load widget_tweaks %}
+{% if form.non_field_errors %}
+<div class="alert alert-danger" role="alert">
+
+{% for error in form.non_field_errors %}
+<p{% if forloop.last %} class="mb-0" {% endif %}>{{ error }}</p>
+{% endfor %}
+</div>
+{% endif %}
+{% for field in form %}
+<div class="col-md-6">
+<div class="form-group">
+{% if field.field.widget.input_type == 'checkbox' %}
+<div class="form-check form-switch">
+{% render_field field class="form-check-input ms-auto" %}
+<label class="form-check-label text-body ms-3 text-truncate w-250 mb-0"
+for="flexSwitchCheckDefault5">{{ field.label_tag }}</label>
+</div>
+{% else %}
+<label for="example-text-input" class="form-control-label">{{ field.label_tag
+}}</label>
+{% render_field field class="form-control" %}
+{% endif %}
+</div>
+</div>
+{% for error in field.errors %}
+<div class="invalid-feedback">
+{{ error }}
+</div>
+{% endfor %}
+{% endfor %}
+• Add page for adding in projectsite/templates/trainer_add.html
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<form role="form" class="" action="" method="post" novalidate>
+{% csrf_token %}
+{% include 'includes/form.html' %}
+<br />
+<div class="form-group">
+<div class="col-md-12 col-sm-3">
+<button type='submit' class="btn btn-primary">Submit</button>
+</div>
+</div>
+</form>
+{% endblock %}

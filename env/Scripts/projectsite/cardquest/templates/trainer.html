@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,6 +25,7 @@
 
     <!--TRAINERS-->
     <main>
+    {% block content %}
     <section class="trainers-container">
       <table class="styled-table">
         <tbody>
@@ -114,6 +118,10 @@
         </tbody>
       </table>
     </section>
+    <div>
+      {% include 'includes/pagination.html' %}
+      </div>
+    {% endblock %}
   </main>
     <footer>
       <br />
