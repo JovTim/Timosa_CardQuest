@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block navbar %}
+<section class="navbar">
+<a href="{% url 'home' %}" class="btn"> Home </a>
+<a href="{% url 'trainer-list' %}" class="btn"> Trainer </a>
+<a href="{% url 'pokemoncard' %}" class="btn" id="active"> Pokemon Card </a>
+<a href="{% url 'collection-list' %}" class="btn"> Collection </a>
+</section>
+{% endblock navbar %}
 {% block content %}
+<a href="{% url 'pokemoncard-add' %}" class="btn btn-outline-primary">Add New Pokemon</a><br>
 <section class="cards-container">
 <!-- Display Pokemon Cards -->
 {% for card in pokemoncard %}
@@ -8,15 +17,12 @@
 <div class="card">
 <div class="card-type" id="{{ card.card_type|lower }}">
 <div class="card-image" id="{{ card.card_type|lower }}-img">
-{% for pokemon in pokemon_data %}
-{% if pokemon.name == card.name %}
-<img src="{{ pokemon.image_url }}" alt="{{ pokemon.name }} Image">
-{% endif %}
-{% endfor %}
+
+<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{ card.card_number|stringformat:'03d' }}.png" alt="{{ pokemon.name }}" alt="{{ pokemon.name }} Image">
 </div>
 <div class="card-name">
 <h2 class="sbs">{{ card.name}}</h2>
-<h2 class="sbs" id="card-number">#0025</h2>
+<h2 class="sbs" id="card-number">#{{ card.card_number|stringformat:"04d" }} </h2>
 <hr />
 </div>
 <div class="card-rarity">
@@ -50,11 +56,20 @@
 <td>{{ card.abilities }}</td>
 </tr>
 </tbody>
+
 </table>
 <hr />
+<td>
+    <a href="pokemon_list/{{ card.id }}" >Edit</a> |
+<a href="pokemon_list/{{ card.id }}/delete" >Delete</a>
+</td>
 </div>
 </div>
 </div>
 {% endfor %}
+<div>
+    {% include 'includes/pagination.html' %}
+    </div>
 </section>
 {% endblock %}
+

@@ -15,12 +15,14 @@
   </head>
   <body>
     <!--NAVBAR-->
+    {% block navbar %}
     <section class="navbar">
-      <a href="home.html" class="btn" id="active"> Home </a>
-      <a href="{% url 'trainer-list' %}" class="btn"> Trainer </a>
-      <a href="pokemon-card.html" class="btn"> Pokemon Card </a>
-      <a href="collection.html" class="btn"> Collection </a>
+    <a href="{% url 'home' %}" class="btn" id="active"> Home </a>
+    <a href="{% url 'trainer-list' %}" class="btn"> Trainer </a>
+    <a href="{% url 'pokemoncard' %}" class="btn"> Pokemon Card </a>
+    <a href="{% url 'collection-list' %}" class="btn"> Collection </a>
     </section>
+  {% endblock navbar %}
 
     <!--CONTENT-->
     <main>
@@ -38,14 +40,11 @@
       </p>
       <br>
       <div class="social-icons">
-        <a href="https://github.com/developer" target="_blank" class="icon-link">
+        <a href="https://github.com/JovTim" target="_blank" class="icon-link">
           <i class="fab fa-github"></i>
         </a>
-        <a href="https://facebook.com/yourpage" target="_blank" class="icon-link">
+        <a href="https://facebook.com/jovan.timosa.3" target="_blank" class="icon-link">
           <i class="fab fa-facebook"></i>
-        </a>
-        <a href="https://instagram.com/youraccount" target="_blank" class="icon-link">
-          <i class="fab fa-instagram"></i>
         </a>
         <!-- Add other social media icons similarly -->
       </div>

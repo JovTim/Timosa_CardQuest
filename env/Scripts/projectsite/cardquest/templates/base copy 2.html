@@ -15,9 +15,12 @@
   </head>
   <body>
     <!--NAVBAR-->
-    {% block navbar %}
-
-    {% endblock navbar %}
+    <section class="navbar">
+      <a href="{% url 'home' %}" class="btn" id="active"> Home </a>
+      <a href="{% url 'trainer-list' %}" class="btn"> Trainer </a>
+      <a href="{% url 'pokemoncard' %}" class="btn"> Pokemon Card </a>
+      <a href="{% url 'collection-list' %}" class="btn"> Collection </a>
+    </section>
 
     <!--CONTENT-->
     <main>

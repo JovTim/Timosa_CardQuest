@@ -55,13 +55,11 @@ class PokemonCard(BaseModel):
     evolution_stage = models.CharField(max_length=250, null=True, blank=True)
     abilities = models.CharField(max_length=250, null=True, blank=True)
     
-    def __str__(self):
-        return self.name
+    def __str__(self) -> str:
+        return self.name if self.name else "Unnamed Pokemon"
     
 class Collection(BaseModel):
     trainer = models.ForeignKey(Trainer, null=True, blank=True, on_delete= models.CASCADE)
     card = models.ForeignKey(PokemonCard, blank=True, null=True, on_delete=models.CASCADE)
     collection_date = models.DateField()
 
-    def __str__(self):
-        return self.trainer

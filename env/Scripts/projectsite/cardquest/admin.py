@@ -16,3 +16,4 @@ class PokemonAdmin(admin.ModelAdmin):
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ("trainer", "card", "collection_date")
+    search_fields = ("trainer",)

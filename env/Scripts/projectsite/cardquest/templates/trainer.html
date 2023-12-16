@@ -16,16 +16,20 @@
   </head>
   <body>
     <!--NAVBAR-->
+    {% block navbar %}
     <section class="navbar">
-      <a href="home.html" class="btn"> Home </a>
-      <a href="trainer.html" class="btn" id="active"> Trainer </a>
-      <a href="pokemon-card.html" class="btn"> Pokemon Card </a>
-      <a href="collection.html" class="btn"> Collection </a>
+    <a href="{% url 'home' %}" class="btn" > Home </a>
+    <a href="{% url 'trainer-list' %}" class="btn" id="active"> Trainer </a>
+    <a href="{% url 'pokemoncard' %}" class="btn"> Pokemon Card </a>
+    <a href="{% url 'collection-list' %}" class="btn"> Collection </a>
     </section>
+  {% endblock navbar %}
 
     <!--TRAINERS-->
     <main>
     {% block content %}
+    <a href="{% url 'trainer-add' %}" class="btn btn-outline-primary">Add New
+      Trainer</a><br>
     <section class="trainers-container">
       <table class="styled-table">
         <tbody>
@@ -57,29 +61,6 @@
       </div>
     {% endblock %}
   </main>
-    <footer>
-      <br />
-      <br />
-      <p>
-        POKEMON<br />
-        Gotta Catch 'Em All
-      </p>
-      <br>
-      <div class="social-icons">
-        <a href="https://github.com/developer" target="_blank" class="icon-link">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://facebook.com/yourpage" target="_blank" class="icon-link">
-          <i class="fab fa-facebook"></i>
-        </a>
-        <a href="https://instagram.com/youraccount" target="_blank" class="icon-link">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <!-- Add other social media icons similarly -->
-      </div>
-      <p>
-        &copy; 2023 YourWebsiteName. All Rights Reserved.
-      </p>
-  </footer>
+  {% include "includes/footer.html" %}
   </body>
 </html>

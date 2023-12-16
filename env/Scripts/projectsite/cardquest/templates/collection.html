@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,66 +16,49 @@
   </head>
   <body>
     <!--NAVBAR-->
+    {% block navbar %}
     <section class="navbar">
-      <a href="home.html" class="btn"> Home </a>
-      <a href="trainer.html" class="btn"> Trainer </a>
-      <a href="pokemon-card.html" class="btn"> Pokemon Card </a>
-      <a href="collection.html" class="btn" id="active"> Collection </a>
+    <a href="{% url 'home' %}" class="btn"> Home </a>
+    <a href="{% url 'trainer-list' %}" class="btn"> Trainer </a>
+    <a href="{% url 'pokemoncard' %}" class="btn"> Pokemon Card </a>
+    <a href="{% url 'collection-list' %}" class="btn" id="active"> Collection </a>
     </section>
+  {% endblock navbar %}
 
     <!--COLLECTION-->
     <main>
-    <section class="collection-container">
-      <table class="styled-table">
+      {% block content %}
+      <a href="{% url 'collection-add' %}" class="btn btn-outline-primary">Add New
+        Trainer</a><br>
+<section class="collection-container">
+    <table class="styled-table">
         <tbody>
-          <tr>
+            <tr>
+            <th>Card</th>
             <th>Trainer</th>
-            <th>Pokemon Card</th>
             <th>Collection Date</th>
-          </tr>
-
-          <tr>
-            <td>Ash</td>
-            <td>Pikachu</td>
-            <td>2023-01-23</td>
-          </tr>
-          <tr>
-            <td>Ash</td>
-            <td>Pikachu</td>
-            <td>2023-01-23</td>
-          </tr>
-          <tr>
-            <td>Ash</td>
-            <td>Pikachu</td>
-            <td>2023-01-23</td>
-          </tr>
+            <th>Actions</th>
+            </tr>
+    
+            {% for object in object_list %}
+            <tr>
+                <td>{{ object.card }}</td>
+                <td>{{ object.trainer }}</td>
+                <td>{{ object.collection_date }}</td>
+                <td>
+                    <a href="collection_list/{{ object.id }}" >Edit</a> |
+                    <a href="collection_list/{{ object.id }}/delete" >Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
         </tbody>
-      </table>
-    </section>
+    </table>
+</section>
+<div>
+    {% include 'includes/pagination.html' %}
+</div>
+{% endblock %}
   </main>
-  <footer>
-    <br />
-    <br />
-    <p>
-      POKEMON<br />
-      Gotta Catch 'Em All
-    </p>
-    <br>
-    <div class="social-icons">
-      <a href="https://github.com/developer" target="_blank" class="icon-link">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="https://facebook.com/yourpage" target="_blank" class="icon-link">
-        <i class="fab fa-facebook"></i>
-      </a>
-      <a href="https://instagram.com/youraccount" target="_blank" class="icon-link">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <!-- Add other social media icons similarly -->
-    </div>
-    <p>
-      &copy; 2023 YourWebsiteName. All Rights Reserved.
-    </p>
-</footer>
+  {% include "includes/footer.html" %}
   </body>
 </html>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navbar %}
+<section class="navbar">
+<a href="{% url 'home' %}" class="btn"> Home </a>
+<a href="{% url 'trainer-list' %}" class="btn"> Trainer </a>
+<a href="{% url 'pokemoncard' %}" class="btn"> Pokemon Card </a>
+<a href="{% url 'collection-list' %}" class="btn"  id="active"> Collection </a>
+</section>
+{% endblock navbar %}
+{% block content %}
+<div class="card-body ">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row ">
+            <p>Are you sure you want this collection?</p>
+        </div>
+        <input class="col-md-4 btn btn-primary" type="submit" value="Confirm">
+    </form>
+</div>
+{% endblock %}
