@@ -6,6 +6,8 @@ from .models import PokemonCard, Trainer
 from .forms import TrainerForm
 
 from django.urls import reverse_lazy
+import json
+
 # Create your views here.
 class HomePageView(ListView):
     model = PokemonCard
@@ -43,3 +45,20 @@ class TrainerDeleteView(DeleteView):
     model = Trainer
     template_name = 'trainer_del.html'
     success_url = reverse_lazy('trainer-list')
+
+class PokemonCardListView(ListView):
+    model = PokemonCard
+    context_object_name = 'pokemoncard'
+    template_name = "pokemoncards.html"
+    json_file_patch = 'data/pokemon_data.json'
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        pokemon_data = self.get_pokemon_data()
+        context['pokemon_data'] = pokemon_data
+        return context
+    
+    def get_pokemon_data(self):
+        with open(self.json_file_patch, 'r') as file:
+            data = json.load(file)
+            return data.get('pokemons', [])
